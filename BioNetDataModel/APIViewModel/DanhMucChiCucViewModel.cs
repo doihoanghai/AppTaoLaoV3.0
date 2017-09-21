@@ -29,6 +29,5 @@ namespace Bionet.API.Models
 
         public string TenTTSL { get; set; }
 
-        
     }
 }

@@ -8,20 +8,15 @@ using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using System.Web;
-using System.IO.Compression;
 
 namespace DataSync
 {
     public class DBPhieuKQDataSync
     {
         private static BioNetDBContextDataContext db = null;
-        private static string linkPDF = "/api/patient/pushlistfilekq";  
-        
-        
-            
+        private static string linkPDF = "/api/patient/pushlistfilekq";      
         public static PsReponse PostKQPDF()
         {
-             
             PsReponse res = new PsReponse();
             res.Result = true;
             try

@@ -44,9 +44,3 @@ C:\Users\Dev02\Documents\thanhquangqb95\AppTaoLaoV2.0\BioNetDataModel\bin\Debug\
 C:\Users\Dev02\Documents\thanhquangqb95\AppTaoLaoV2.0\BioNetDataModel\obj\Debug\BioNetModel.csprojResolveAssemblyReference.cache
 C:\Users\Dev02\Documents\thanhquangqb95\AppTaoLaoV2.0\BioNetDataModel\obj\Debug\BioNetModel.dll
 C:\Users\Dev02\Documents\thanhquangqb95\AppTaoLaoV2.0\BioNetDataModel\obj\Debug\BioNetModel.pdb
-D:\www\AppTaoLaoV2.0\AppTaoLaoV2.0\BioNetDataModel\bin\Debug\BioNetModel.dll.config
-D:\www\AppTaoLaoV2.0\AppTaoLaoV2.0\BioNetDataModel\bin\Debug\BioNetModel.dll
-D:\www\AppTaoLaoV2.0\AppTaoLaoV2.0\BioNetDataModel\bin\Debug\BioNetModel.pdb
-D:\www\AppTaoLaoV2.0\AppTaoLaoV2.0\BioNetDataModel\obj\Debug\BioNetModel.csprojResolveAssemblyReference.cache
-D:\www\AppTaoLaoV2.0\AppTaoLaoV2.0\BioNetDataModel\obj\Debug\BioNetModel.dll
-D:\www\AppTaoLaoV2.0\AppTaoLaoV2.0\BioNetDataModel\obj\Debug\BioNetModel.pdb

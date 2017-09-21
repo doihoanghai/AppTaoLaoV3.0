@@ -100,7 +100,7 @@ namespace DataSync.BioNetSync
                         kyth.GiaTriTrungBinhNam = cl.GiaTriTrungBinhNam;
                         kyth.GiaTriTrungBinhNu = cl.GiaTriTrungBinhNu;
                         kyth.MaDonViTinh = cl.MaDonViTinh;
-                      
+                        kyth.MaNhom = kyt.MaNhom;
                         kyth.Stt = cl.Stt;
                         kyth.TenThongSo = cl.TenThongSo;
                         kyth.IDThongSoXN = cl.IDThongSoXN;

@@ -31,7 +31,6 @@ namespace DataSync.BioNetSync
         public static PsReponse PostDanhMucChiCuc()
         {
             PsReponse res = new PsReponse();
-            res.Result = true;
             try
             {
                 ProcessDataSync cn = new ProcessDataSync();
@@ -50,12 +49,12 @@ namespace DataSync.BioNetSync
                             string jsonstr = new JavaScriptSerializer().Serialize(datact);
                             var result = cn.PostRespone(cn.CreateLink(linkPostDanhMucChiCuc), token, jsonstr);
                             if (result.Result)
-                            {  
+                            {
+                                res.StringError += "Dữ liệu chi cục " + data.TenChiCuc + " đã được đồng bộ lên tổng cục \r\n";
                                 var resupdate = UpdateStatusSyncDanhMucChiCuc(data);
                                 if (!resupdate.Result)
                                 {
                                     res.StringError += "Dữ liệu chi cục " + data.TenChiCuc + " chưa được cập nhật \r\n";
-                                    res.Result = false;
                                 }
 
                             }
@@ -136,7 +135,6 @@ namespace DataSync.BioNetSync
                                     {
                                         PSDanhMucChiCuc kt = new PSDanhMucChiCuc();
                                         kt = cn.CovertDynamicToObjectModel(item, kt);
-                                        kt.isDongBo = true;
                                         var resup =    UpdateDMChiCuc(kt);
                                         if(!resup.Result)
                                         { res.StringError += resup.StringError;
@@ -191,7 +189,8 @@ namespace DataSync.BioNetSync
                 var kyt = db.PSDanhMucChiCucs.FirstOrDefault(p => p.MaChiCuc == cc.MaChiCuc);
                 if (kyt != null)
                 {
-                   
+                    if (!kyt.isDongBo)
+                    {
                         kyt.isLocked = cc.isLocked;
                         kyt.Stt = cc.Stt;
                         kyt.TenChiCuc = Encoding.UTF8.GetString(Encoding.Default.GetBytes( cc.TenChiCuc));
@@ -208,8 +207,8 @@ namespace DataSync.BioNetSync
                         { }
 
                         db.SubmitChanges();
-              }
-                
+                    }
+                }
                 else
                 {
                   

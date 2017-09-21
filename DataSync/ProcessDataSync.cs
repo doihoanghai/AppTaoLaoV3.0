@@ -24,7 +24,7 @@ namespace DataSync
 {
    public  class ProcessDataSync
     {
-        private static string linkhost = "http://localhost:53112/";
+        private static string linkhost = "http://192.168.88.169/";
         private static string linkGetToken = "/oauth/token";
         private static string linkThongTinTrungTam = "api/trungtamsangloc/getall";
         
