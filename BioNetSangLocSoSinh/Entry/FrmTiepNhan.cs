@@ -15,6 +15,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraSplashScreen;
+using System.Threading;
 
 namespace BioNetSangLocSoSinh.Entry
 {
@@ -42,11 +43,14 @@ namespace BioNetSangLocSoSinh.Entry
             //this.lstDVCS.Clear();
             //this.lstPhieu.Clear();
             //this.lstPhieuTaiDVCS.Clear();
-            this.LoadLookupDonViCoSo();
-            this.searchLookUpDonViCoSo.EditValue = "ALL";
-            this.LoadRepositoryLookupDonViCoSo();
-            this.LoadSearchLookUpDonViCoSoTiepNhan();
-            this.LoadSearchLookupDonViCoSo();
+            //this.LoadLookupDonViCoSo();
+            //this.searchLookUpDonViCoSo.EditValue = "ALL";
+          
+            this.LoadsearchLookUpChiCucPhieu();
+            //this.LoadRepositoryLookupDonViCoSo();
+            //this.LoadSearchLookUpDonViCoSoTiepNhan();
+            //this.LoadSearchLookupDonViCoSo();
+            this.LoadsearchLookUpChiCuc();
             this.txtTuNgay_ChuaKQ.EditValue = DateTime.Now;
             this.txtDenNgay_ChuaKQ.EditValue = DateTime.Now;
             this.ReadOnly(true);
@@ -54,7 +58,7 @@ namespace BioNetSangLocSoSinh.Entry
         private void FrmTiepNhan_Load(object sender, EventArgs e)
         {
 
-            this.FrmLoad_From();
+            FrmLoad_From();
             this.txtMaPhieuMoi.Focus();
         }
 
@@ -193,22 +197,72 @@ namespace BioNetSangLocSoSinh.Entry
 
         }
    
-        private void LoadSearchLookUpDonViCoSoTiepNhan()
-        {
-            try
-            {
-                this.searchLookUpDonViCoSoTiepNhan.Properties.DataSource = BioNet_Bus.GetDanhSachDonViCoSo();
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show("Lỗi khi load danh sách đơn vị cơ sở \r\n Lỗi chi tiết :" + ex.ToString(), "BioNet - Chương trình sàng lọc sơ sinh", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                this.searchLookUpDonViCoSoTiepNhan.Focus();
-            }
-        }
+        //private void LoadSearchLookUpDonViCoSoTiepNhan()
+        //{
+        //    try
+        //    {
+        //        this.searchLookUpDonViCoSoTiepNhan.Properties.DataSource = BioNet_Bus.GetDanhSachDonViCoSo();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        XtraMessageBox.Show("Lỗi khi load danh sách đơn vị cơ sở \r\n Lỗi chi tiết :" + ex.ToString(), "BioNet - Chương trình sàng lọc sơ sinh", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        this.searchLookUpDonViCoSoTiepNhan.Focus();
+        //    }
+        //}
         private void LoadDanhSachDichVu()
         {
             this.lstDichVu.Clear();
             this.lstDichVu = BioNet_Bus.GetDanhSachDichVu(false);
+        }
+        private void searchLookUpChiCuc_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                SearchLookUpEdit sear = sender as SearchLookUpEdit;
+                var value = sear.EditValue.ToString();
+                this.searchLookUpDonViCoSoTiepNhan.Properties.DataSource = BioNet_Bus.GetDieuKienLocBaoCao_DonVi(value.ToString());
+                this.searchLookUpDonViCoSoTiepNhan.EditValue = "all";
+            }
+            catch { }
+        }
+        private void LoadsearchLookUpChiCuc()
+        {
+            try
+            {
+                this.searchLookUpChiCuc.Properties.DataSource = BioNet_Bus.GetDieuKienLocBaoCao_ChiCuc();
+                this.searchLookUpChiCuc.EditValue = "all";
+                this.searchLookUpDonViCoSoTiepNhan.EditValue = "all";
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show("Lỗi khi load danh sách chi cục \r\n Lỗi chi tiết :" + ex.ToString(), "BioNet - Chương trình sàng lọc sơ sinh", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.searchLookUpChiCuc.Focus();
+            }
+        }
+        private void LoadsearchLookUpChiCucPhieu()
+        {
+            try
+            {
+                this.searchLookUpChiCucPhieu.Properties.DataSource = BioNet_Bus.GetDieuKienLocBaoCao_ChiCuc();
+                this.searchLookUpChiCucPhieu.EditValue = "all";
+                this.searchLookUpDonViCoSo.EditValue = "all";
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show("Lỗi khi load danh sách chi cục \r\n Lỗi chi tiết :" + ex.ToString(), "BioNet - Chương trình sàng lọc sơ sinh", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.searchLookUpChiCuc.Focus();
+            }
+        }
+        private void searchLookUpChiCucPhieu_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                SearchLookUpEdit sear = sender as SearchLookUpEdit;
+                var value = sear.EditValue.ToString();
+                this.searchLookUpDonViCoSo.Properties.DataSource = BioNet_Bus.GetDieuKienLocBaoCao_DonVi(value.ToString());
+                this.searchLookUpDonViCoSo.EditValue = "all";
+            }
+            catch { }
         }
         private void searchLookUpDonViCoSo_TextChanged(object sender, EventArgs e)
         {
@@ -799,7 +853,7 @@ namespace BioNetSangLocSoSinh.Entry
 
         private void btnTiepNhan_Click(object sender, EventArgs e)
         {
-            if (this.searchLookUpDonViCoSoTiepNhan.EditValue == null)
+            if (this.searchLookUpDonViCoSoTiepNhan.EditValue == null || this.searchLookUpDonViCoSoTiepNhan.EditValue == "all")
             {
                 XtraMessageBox.Show("Bạn chưa chọn đơn vị để tiếp nhận phiếu!", "BioNet - Chương trình sàng lọc sơ sinh", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 this.searchLookUpDonViCoSoTiepNhan.Focus();
@@ -875,5 +929,6 @@ namespace BioNetSangLocSoSinh.Entry
             }
         }
 
+       
     }
 }

@@ -94,11 +94,12 @@ namespace DataSync.BioNetSync
                 db.Transaction = db.Connection.BeginTransaction();
                 foreach (var psl in lstpsl)
                 {
-                    var psldb = db.PSPatients.FirstOrDefault(p => p.MaBenhNhan == psl.MaBenhNhan);
+                    var psldb = db.PSPatients.FirstOrDefault(p => p.MaKhachHang == psl.MaKhachHang);
                     if (psldb != null)
                     {
-                        cn.ConvertObjectToObject(psl, psldb);
-                        psldb.isDongBo = true;
+                        var term = psl.RowIDBenhNhan;
+                        psldb = psl;
+                        psldb.RowIDBenhNhan = term;
                         db.SubmitChanges();
 
                     }
@@ -149,10 +150,7 @@ namespace DataSync.BioNetSync
                     string token = cn.GetToken(account.userName, account.passWord);
                     if (!string.IsNullOrEmpty(token))
                     {
-
                         var datas = db.PSPatients.Where(p => p.isDongBo == false);
-                        List<PSPatient> lstpsl = new List<PSPatient>();
-
                         foreach (var data in datas)
                         {
                             string jsonstr = new JavaScriptSerializer().Serialize(data);
@@ -160,7 +158,7 @@ namespace DataSync.BioNetSync
                             if (result.Result)
                             {
                                 res.StringError += "Dữ liệu Patient " + data.MaKhachHang + " đã được đồng bộ lên tổng cục \r\n";
-                               
+                                List<PSPatient> lstpsl = new List<PSPatient>();
                                 lstpsl.Add(data);
                                 var resupdate = UpdatePatient(lstpsl);
                                 if (!resupdate.Result)

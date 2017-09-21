@@ -153,7 +153,7 @@ namespace DataSync.BioNetSync
                         {
                             string jsonstr = new JavaScriptSerializer().Serialize(data);
                             var result = cn.PostRespone(cn.CreateLink(linkPostPhieuSangLoc), token, jsonstr);
-                            if (result.ErorrResult == "Created")
+                            if (result.Result)
                             {
                                 res.StringError += "Dữ liệu đơn vị " + data.IDCoSo + " đã được đồng bộ lên tổng cục \r\n";
                                 List<PSPhieuSangLoc> lstpsl = new List<PSPhieuSangLoc>();

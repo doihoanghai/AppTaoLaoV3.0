@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DataSync.BioNetSync;
 
-
 namespace DataSync
 {
     public partial class FrmStartupSync : DevExpress.XtraEditors.XtraForm
@@ -24,32 +23,31 @@ namespace DataSync
         }
         public void DongBoDuLieu()
         {
-            //this.GetThongTinTrungTam();
-            //this.GetDanhMucChiCuc();
-            //this.GetDanhMucDonViCoSo();
-            //this.GetDanhMucDichVu();
-            //this.GetDanhSachChuongTrinh();
-            //this.GetDMGoiDichVuTheoDVCS();
-            //this.GetDanhMucThongSo();
-            //this.GetMapThongSo_KyThuat();
-            //this.GetMapDichVu_KyThuat();
-            //this.GetPhieuSangLoc();
-            //this.GetPatient();
 
+            this.PostThongTinTrungTam();
+            this.GetThongTinTrungTam();
+            this.GetDanhMucChiCuc();
+            this.PostDanhMucChiCuc();
+            this.GetDanhMucDonViCoSo();
+            this.GetDanhMucDichVu();
+            this.PostDanhMucDonViCoSo(); 
+            this.GetDanhSachChuongTrinh();
+            this.GetDMGoiDichVuTheoDVCS();
+            this.PostDMGoiDichVuTheoDVCS();
+            this.GetDanhMucThongSo();
+            this.GetMapThongSo_KyThuat();
+            this.GetMapDichVu_KyThuat();
 
-            //this.PostDanhMucChiCuc();
-            //this.PostDanhMucDonViCoSo();
-
-            //this.PostBenhNhanNguyCoCao();
-            //this.PostDotChuanDoan();
-            //this.PostPhieuSangLoc();
-            this.PostPatient();
-            //this.PostChiDinh();
-            //this.PostKetQua();
-            //this.PostTraKetQua();
-            //this.PostTiepNhan();
-            //this.PostFileKQ();
-
+            this.GetPhieuSangLoc();
+            this.GetPatient();
+            this.PostDotChuanDoan();
+            this.PostPhieuSangLoc();
+            this.PostChiDinh();
+            this.PostBenhNhanNguyCoCao();
+            this.PostKetQua();
+            this.PostTraKetQua();
+            this.PostTiepNhan();
+            this.GetTiepNhan();
 
         }
         public  void GetDuLieuBanDau()
@@ -70,44 +68,6 @@ namespace DataSync
             this.GetDanhSachChuongTrinh();
 
 
-        }
-
-        private void PostPatient()
-        {
-            this.rtbStatus.SelectionColor = Color.LightYellow;
-            this.rtbStatus.AppendText(string.Concat(new object[] { DateTime.Now + " :Đang đồng bộ dữ liệu patient\r\n " }));
-            var res = PatientSync.PostPatient();
-            if (string.IsNullOrEmpty(res.StringError))
-            {
-                this.rtbStatus.SelectionColor = Color.LightYellow;
-                this.rtbStatus.AppendText(string.Concat(new object[] { DateTime.Now + " :đồng bộ dữ liệu patient\r\n " }));
-            }
-            else
-            {
-                this.rtbStatus.SelectionColor = Color.Red;
-                this.rtbStatus.AppendText(string.Concat(new object[] { DateTime.Now + ":Thông tin chi tiết khi đồng bộ dữ liệu patient\r\n" + res.StringError + "\r\n" }));
-            }
-
-            this.rtbStatus.ScrollToCaret();
-        }
-
-        private void PostFileKQ()
-        {
-            this.rtbStatus.SelectionColor = Color.LightYellow;
-            this.rtbStatus.AppendText(string.Concat(new object[] { DateTime.Now + " :Đang đồng bộ dữ liệu files kết quả\r\n " }));
-            var res = DBPhieuKQDataSync.PostKQPDF();
-            if (string.IsNullOrEmpty(res.StringError))
-            {
-                this.rtbStatus.SelectionColor = Color.LightYellow;
-                this.rtbStatus.AppendText(string.Concat(new object[] { DateTime.Now + " :đồng bộ dữ liệu files kết quả\r\n " }));
-            }
-            else
-            {
-                this.rtbStatus.SelectionColor = Color.Red;
-                this.rtbStatus.AppendText(string.Concat(new object[] { DateTime.Now + ":Thông tin chi tiết khi đồng bộ dữ liệufiles kết quả\r\n" + res.StringError + "\r\n" }));
-            }
-
-            this.rtbStatus.ScrollToCaret();
         }
 
         private void PostTiepNhan()
@@ -416,17 +376,17 @@ namespace DataSync
         private void PostDanhMucChiCuc()
         {
             this.rtbStatus.SelectionColor = Color.LightYellow;
-            this.rtbStatus.AppendText(string.Concat(new object[] { DateTime.Now + " :Đang đồng bộ dữ liệu Chi Cục \r\n " }));
+            this.rtbStatus.AppendText(string.Concat(new object[] { DateTime.Now + " :Đang đồng bộ dữ liệu Đơn vị cơ sở \r\n " }));
             var res = DanhMucChiCucSync.PostDanhMucChiCuc();
             if (res.Result)
             {
                 this.rtbStatus.SelectionColor = Color.LightYellow;
-                this.rtbStatus.AppendText(string.Concat(new object[] { DateTime.Now + " :đồng bộ dữ liệu  Chi Cục thành công \r\n " }));
+                this.rtbStatus.AppendText(string.Concat(new object[] { DateTime.Now + " :đồng bộ dữ liệu Đơn vị cơ sở thành công \r\n " }));
             }
             else
             {
                 this.rtbStatus.SelectionColor = Color.Red;
-                this.rtbStatus.AppendText(string.Concat(new object[] { DateTime.Now + " :đồng bộ dữ liệu  Chi Cục KHÔNG thành công\r\n Lỗi chi tiết : \r\n" + res.StringError + "\r\n" }));
+                this.rtbStatus.AppendText(string.Concat(new object[] { DateTime.Now + " :đồng bộ dữ liệu Đơn vị cơ sở KHÔNG thành công\r\n Lỗi chi tiết : \r\n" + res.StringError + "\r\n" }));
             }
             this.rtbStatus.ScrollToCaret();
         }
@@ -599,7 +559,7 @@ namespace DataSync
 
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.DongBoDuLieu();
+            this.GetDuLieuBanDau();
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {

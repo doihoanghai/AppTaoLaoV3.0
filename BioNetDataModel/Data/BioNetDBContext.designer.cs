@@ -3867,8 +3867,7 @@ namespace BioNetModel.Data
     partial void OnHeaderReportChanged();
     partial void OnSttChanging(System.Nullable<int> value);
     partial void OnSttChanged();
-    partial void OnEmailChanged();
-        partial void OnMaChiCucChanging(string value);
+    partial void OnMaChiCucChanging(string value);
     partial void OnMaChiCucChanged();
     partial void OnKieuTraKetQuaChanging(System.Nullable<int> value);
     partial void OnKieuTraKetQuaChanged();
@@ -3876,10 +3875,9 @@ namespace BioNetModel.Data
     partial void OnisDongBoChanged();
     partial void OnTenBacSiDaiDienChanging(string value);
     partial void OnTenBacSiDaiDienChanged();
-        partial void OnEmailChanging(string value);
-        #endregion
-
-        public PSDanhMucDonViCoSo()
+    #endregion
+		
+		public PSDanhMucDonViCoSo()
 		{
 			OnCreated();
 		}
@@ -4154,11 +4152,11 @@ namespace BioNetModel.Data
             {
                 if ((this._Email != value))
                 {
-                    this.OnEmailChanging(value);
+                    this.OnTenBacSiDaiDienChanging(value);
                     this.SendPropertyChanging();
                     this._Email = value;
                     this.SendPropertyChanged("Email");
-                    this.OnEmailChanged();
+                    this.OnTenBacSiDaiDienChanged();
                 }
             }
         }

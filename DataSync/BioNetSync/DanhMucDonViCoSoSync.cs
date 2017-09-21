@@ -16,8 +16,6 @@ namespace DataSync.BioNetSync
         public static PsReponse PostDanhMucDonViCoSo()
         {
             PsReponse res = new PsReponse();
-            res.Result = true;
-
             try
             {
                 ProcessDataSync cn = new ProcessDataSync();
@@ -35,6 +33,7 @@ namespace DataSync.BioNetSync
                             var result = cn.PostRespone(cn.CreateLink(linkPostDanhMucDonViCoSo), token, jsonstr);
                             if (result.Result)
                             {
+                                res.StringError += "Dữ liệu đơn vị " + data.TenDVCS + " đã được đồng bộ lên tổng cục \r\n";
                                 var resupdate = UpdateStatusSyncDanhMucDonVi(data);
                                 if (!resupdate.Result)
                                 {
@@ -184,7 +183,6 @@ namespace DataSync.BioNetSync
                         kyt.isLocked = cc.isLocked;
                         kyt.KieuTraKetQua = cc.KieuTraKetQua;
                         kyt.TenBacSiDaiDien = Encoding.UTF8.GetString(Encoding.Default.GetBytes(cc.TenBacSiDaiDien));
-                        kyt.Email = cc.Email;
                         
                         try
                         {
@@ -210,7 +208,6 @@ namespace DataSync.BioNetSync
                     ccnew.isDongBo  = true;
                     ccnew.MaChiCuc = cc.MaChiCuc;
                     ccnew.MaDVCS = cc.MaDVCS;
-                    ccnew.Email = cc.Email;
                     try
                     {
                         ccnew.HeaderReport = cc.HeaderReport;
